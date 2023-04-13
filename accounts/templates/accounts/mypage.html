@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Mypage
+{% endblock title %}
+
+{% block content %}
+  {% if user.profile_image %}
+    <img src="{{ user.profile_image.url }}" alt="profile_image">
+  {% else %}
+    <img src="{% static 'image/img-profile-none.png' %}" alt="profile_image_none">
+  {% endif %}
+  <p>아이디: {{ user.username }}</p>
+  <p>이름: {{ user.last_name }}</p>
+  <p>이메일: {{ user.email }}</p>
+  <p>생년월일: {{ user.birthday }}</p>
+{% endblock content %}
