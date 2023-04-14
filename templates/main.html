@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Main{% endblock title %}
+
+
+{% block content %}
+
+<div class="d-flex gap-3 justify-content-center">
+    {% for rank,movie in movie_list.items %}
+    <div>
+      <h1>{{ rank }}위</h1>
+      <div class = "m-2 rounded-2" style="width: 300px; height: 480px; text-align: center; background-color: #252451; ">
+        <img src="{{ movie.0 }}" alt="" class="w-80 h-80 rounded-2 mt-3">
+        <p class="rank-title">{{ movie.1}} / {{ movie.2 }}</p>
+      </div>
+    </div> 
+    {% endfor %}
+  </div>
+
+{% endblock content %}
