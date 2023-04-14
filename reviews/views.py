@@ -19,7 +19,7 @@ def create(request):
         if form.is_valid():
             review = form.save(commit=False)
             review.user = request.user
-            form.save()
+            review.save()
             return redirect('reviews:detail', review.pk)
     else:
         form = ReviewForm()
@@ -92,7 +92,7 @@ def comment_delete(request, review_pk, comment_pk):
     comment = Comment.objects.get(pk=comment_pk)
     if comment.user == request.user:
         comment.delete()
-    return redirect('review:detail', review_pk)
+    return redirect('reviews:detail', review_pk)
 
 
 @login_required

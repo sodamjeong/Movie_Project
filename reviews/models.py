@@ -23,12 +23,12 @@ class Review(models.Model):
     def count_likes_user(self):
         return self.like_users.count()
 
-    def delete(self, args, **kargs):
+    def delete(self, *args, **kargs):
         if self.img_file:
             os.remove(os.path.join(settings.MEDIA_ROOT, self.img_file.path))
-        super(Review, self).delete(args, kargs)
+        super(Review, self).delete(*args, **kargs)
 
-    def save(self, *args, kwargs):
+    def save(self, *args, **kwargs):
         if self.id:
             old_review = Review.objects.get(id=self.id)
             if self.img_file != old_review.img_file:
