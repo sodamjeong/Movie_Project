@@ -39,30 +39,35 @@
     <div>
         <div class='d-flex justify-content-between'>
             <p>{{ review.created_at|date:'Y-m-d' }} | {{ review.user }} | {{ review.category }}</p>
-            <div class='d-flex'>
-                <a href="{% url 'reviews:update' review.pk %}">수정</a>
-                <form action="{% url 'reviews:delete' review.pk %}" method='POST'>
-                    {% csrf_token %}
-                    <input type="submit" value='삭제' onclick="return confirm('삭제하시겠습니까?')">
-                </form>
-            </div>
+            {% if request.user == review.user %}
+                <div class='d-flex gap-1'>
+                    <a href="{% url 'reviews:update' review.pk %}" class="btn btn-login">수정</a>
+                    <form action="{% url 'reviews:delete' review.pk %}" method='POST'>
+                        {% csrf_token %}
+                        <input type="submit" value='삭제' class="btn btn-login" onclick="return confirm('삭제하시겠습니까?')">
+                    </form>
+                </div>
+            {% endif %}
         </div>
         <p>{{ review.title }}</p>
         <p>{{ review.content }}</p>
     </div>
     <div>
         <h6>댓글</h6>
+        {% if request.user.is_authenticated %}
         <div>
             <form action="{% url 'reviews:comment_create' review.pk %}" method='POST'>
                 {% csrf_token %}
                 {% for field in form %}
                     {{ field.label }}
-                    {{ field }}
-                    <input type="submit" value='댓글'>
+                    <div class="d-flex gap-3">
+                        {{ field }}
+                        <input type="submit" value='댓글 작성' class="btn btn-login ms-auto">
+                    </div> 
                 {% endfor %}
             </form>
         </div>
-
+        {% endif %}
         <ul>
             {% for comment in comments %}
                 <li>
@@ -81,7 +86,7 @@
                     {% if comment.user == request.user %}
                         <form action="{% url 'reviews:comment_delete' review.pk comment.pk %}" method='POST'>
                             {% csrf_token %}
-                            <input type="submit" value='삭제'>
+                            <input type="submit" value='삭제' class="btn btn-login btn-sm">
                         </form>
                     {% endif %}
                 </li>
@@ -96,4 +101,4 @@
 </div>
 
 
-{% endblock  %}
+{% endblock  %}s

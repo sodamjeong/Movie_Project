@@ -1,12 +1,24 @@
 .card-form {
-    height: 440px;
-    width: 250px;
+    height: 400px;
+    width: 300px;
     border-radius: 10px;
     border: 0.1px solid lightgray;
+    color:#503396;
 }
 
 .img {
-    height: 330px;
-    width: 248px;
-    border-radius: 10px;
+    height: 270px;
+    width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.movie-title {
+    color: #252451;
+    font-weight: bold;
+}
+
+.time {
+    width: 70px;
+    text-align: right;
 }

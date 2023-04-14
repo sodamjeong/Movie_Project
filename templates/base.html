@@ -12,24 +12,26 @@
     {% block style %}{% endblock style %}
 </head>
 <body>
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'reviews:index' %}">
                 <img src="{% static 'image/logo.png' %}" alt="logo" class='logo'>
-                About Movie
+                MovieBox
             </a>
             {% if request.user.is_authenticated %}
-                <div>
-                    <p>{{ request.user }} 님 안녕하세요</p>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="usertext"><a href="{% url 'accounts:mypage' user.pk %}" class="usertext">{{ request.user }}</a> 님 안녕하세요</span>
+                    <a href="{% url 'reviews:create' %}" class='btn nav-btn'>+ 글쓰기</a>
                     <form action="{% url 'accounts:logout' %}" method='POST'>
                         {% csrf_token %}
-                        <input type="submit" value='Logout' onclick="return confirm('로그아웃 하시겠습니까?')">
+                        <input type="submit" value='Logout' class="btn nav-btn" onclick="return confirm('로그아웃 하시겠습니까?')">
                     </form>
                 </div>
             {% else %}
                 <div>
-                    <a href="{% url 'accounts:login' %}">Login</a>
-                    <a href="{% url 'accounts:signup' %}">Signup</a>
+                    <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#loginmodal">
+                    Login</button>
+                    <a href="{% url 'accounts:signup' %}" class="btn nav-btn">Signup</a>
                 </div>
             {% endif %}
         </div>
@@ -38,9 +40,45 @@
     <section>
         {% block content %}{% endblock content %}
     </section>
-    <footer>
 
+    <!-- Modal -->
+    <div class="modal fade" id="loginmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">로그인</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'accounts:login' %}" method="POST">
+                    {% csrf_token %}
+                    {{ login_form.as_p }}
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-login" value="로그인">
+                    </div>     
+                </form>
+            </div>    
+            
+        </div>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <a href='https://github.com/JeonggonCho' target='_blank'>조정곤</a> |
+            <a href='https://github.com/kwonjh0825' target='_blank'>권준혁</a> |
+            <a href='https://github.com/sodamjeong' target='_blank'>정소담</a>
+          </div>
+          <p>
+            <span>KDT 풀스택 2기</span><br/>
+            <span>Copyright 2023. All Rights Reserved.</span>
+          </p>
+          </footer>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
+<script>
+    const back = () => {
+        window.history.back()
+    }
+  </script>
 </html>

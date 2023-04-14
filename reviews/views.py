@@ -2,12 +2,14 @@ from django.shortcuts import render,redirect
 from .models import Review, Comment
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm, CommentForm
-
+from django.contrib.auth.forms import AuthenticationForm
+from accounts.forms import CustomAuthenticationForm
 # Create your views here.
 def index(request):
     reviews = Review.objects.all()
     context = {
         'reviews': reviews,
+        'login_form': CustomAuthenticationForm(),
     }
     return render(request, 'reviews/index.html', context)
 
@@ -25,6 +27,7 @@ def create(request):
         form = ReviewForm()
     context = {
         'form': form,
+        'login_form': CustomAuthenticationForm(),
     }
     return render(request, 'reviews/create.html', context)
 
@@ -45,7 +48,8 @@ def detail(request, review_pk):
         'review': review,
         'form': form,
         'comments': comments,
-        'like_users': review.count_likes_user()
+        'like_users': review.count_likes_user(),
+        'login_form': CustomAuthenticationForm(),
     }
     return render(request, 'reviews/detail.html', context)
 
