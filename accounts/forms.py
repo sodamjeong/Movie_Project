@@ -134,7 +134,7 @@ class CustomUserChangeForm(UserChangeForm):
     
     class Meta(UserChangeForm):
         model = get_user_model()
-        fields = ('email', 'last_name', 'birthday', )
+        fields = ('email', 'last_name', 'birthday', 'profile_image', )
 
 
 class CustomPasswordChangeForm(PasswordChangeForm):
