@@ -10,7 +10,7 @@ from django.conf import settings
 # Create your views here.
 def signup(request):
     if request.user.is_authenticated:
-        return redirect('reivews:index')
+        return redirect('reviews:index')
     login_form = AuthenticationForm()
     if request.method == 'POST':
         signup_form = CustomUserCreationForm(request.POST, request.FILES)
@@ -35,6 +35,12 @@ def login(request):
         if form.is_valid():
             auth_login(request, form.get_user())
             return redirect('reviews:index')
+    else:
+        form= CustomAuthenticationForm()
+    context = {
+        'login_form': form,
+    }
+    return render(request,'reviews/index.html', context)
 
 @login_required
 def logout(request):

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
+from accounts.forms import CustomAuthenticationForm
 
 def main(request):
     url = 'https://www.megabox.co.kr/'
@@ -19,5 +20,6 @@ def main(request):
             break
     context = {
         'movie_list' : movie_list,
+        'login_form': CustomAuthenticationForm(),
     }
     return render(request, 'main.html', context)
