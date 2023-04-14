@@ -1,0 +1,38 @@
+.img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 380px;
+    width: 260px;
+    z-index: 1000;
+}
+
+.bg-img-form {
+    position: relative;
+    height: 450px;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.bg-filter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 450px;
+    width: 100%;
+    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 10;
+}
+
+.bg-img {
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}

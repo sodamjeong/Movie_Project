@@ -1,0 +1,12 @@
+.card-form {
+    height: 440px;
+    width: 250px;
+    border-radius: 10px;
+    border: 0.1px solid lightgray;
+}
+
+.img {
+    height: 330px;
+    width: 248px;
+    border-radius: 10px;
+}
