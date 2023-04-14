@@ -19,7 +19,7 @@
                     <img src="{% static 'image/logo.png' %}" alt="logo" class='logo'>
                     MovieBox
                 </a>
-                <a class="navbar-brand" href="{% url 'reviews:index' %}">
+                <a class="navbar-review" href="{% url 'reviews:index' %}">
                     리뷰보기
                 </a>
             </div>
@@ -51,9 +51,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">로그인</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+                  <h1 class="modal-title fs-5 fw-semibold" id="staticBackdropLabel">로그인</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
             <div class="modal-body">
                 <form action="{% url 'accounts:login' %}" method="POST">
                     {% csrf_token %}
@@ -63,8 +63,7 @@
                     </div>     
                 </form>
             </div>    
-            
-        </div>
+            </div>
         </div>
     </div>
     <footer>

@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
+{% block title %}Update{% endblock title %}
+
 {% block content %}
-<div class='container-fluid'>
+<div class='container-fluid createform'>
     <div class='d-flex align-items-center gap-3 mb-4'>
-        <h4>리뷰 수정</h4>
+        <p class="title">리뷰 수정</h4>
     </div>
     <div>
         <form action="{% url 'reviews:update' review.pk %}" method='POST' enctype='multipart/form-data'>
@@ -14,7 +16,10 @@
                     <p>{{ field }}</p>
                 </div>
             {% endfor %}
-            <input type="submit" class='btn btn-secondary' value='리뷰수정'>
+            <div class="signup_btn">
+                <input type="submit" class='btn btn-login' value='등록'>
+                <button class="btn btn-login" onclick=back()>뒤로가기</button>
+            </div>
         </form>
     </div>
 </div>
