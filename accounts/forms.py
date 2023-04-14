@@ -129,6 +129,8 @@ class CustomUserChangeForm(UserChangeForm):
         ),
         required=False,
     )
+
+    password = None
     
     class Meta(UserChangeForm):
         model = get_user_model()
