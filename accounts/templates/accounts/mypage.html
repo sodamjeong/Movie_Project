@@ -5,8 +5,8 @@
 {% endblock title %}
 
 {% block content %}
-<div class="d-flex flex-column align-items-center">
-  <h1>마이페이지</h1>
+<div class="d-flex flex-column align-items-center mt-5">
+  <p class="title">마이페이지</p>
   <div class="profile-image rounded-circle">
     {% if user.profile_image %}
       <img src="{{ user.profile_image.url }}" alt="profile_image" class="object-fit-fill profile">
@@ -21,6 +21,7 @@
     <div>
       <a href="{% url 'accounts:update' %}" class="btn btn-login">회원정보 수정</a>
       <a href="{% url 'accounts:delete' %}" class="btn btn-login" onclick="return confirm('탈퇴 시, 더 이상 서비스를 이용하실 수 없습니다.                            정말 탈퇴하시겠습니까?')">회원탈퇴</a>
+      <a href="{% url 'main' %}" class="btn btn-login">홈으로</a>
     </div>
-  </div>
+</div>
 {% endblock content %}

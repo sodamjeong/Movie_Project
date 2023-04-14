@@ -1,20 +1,98 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="icon" href="{% static 'image/movie_favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block style %}{% endblock style %}
+</head>
+<body style="background-color: black;">
+    <nav class="navbar sticky-top">
+        <div class="container-fluid">
+            <div>
+                <a class="navbar-brand" href="http://127.0.0.1:8000/">
+                    <img src="{% static 'image/logo.png' %}" alt="logo" class='logo'>
+                    MovieBox
+                </a>
+                <a class="navbar-review" href="{% url 'reviews:index' %}">
+                    리뷰보기
+                </a>
+            </div>
+            {% if request.user.is_authenticated %}
+                <div class="d-flex align-items-center gap-3">
+                    <span class="usertext"><a href="{% url 'accounts:mypage' user.pk %}" class="usertext">{{ request.user }}</a> 님 안녕하세요</span>
+                    <a href="{% url 'reviews:create' %}" class='btn nav-btn'>+ 글쓰기</a>
+                    <form action="{% url 'accounts:logout' %}" method='POST'>
+                        {% csrf_token %}
+                        <input type="submit" value='Logout' class="btn nav-btn" onclick="return confirm('로그아웃 하시겠습니까?')">
+                    </form>
+                </div>
+            {% else %}
+                <div>
+                    <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#loginmodal">
+                    Login</button>
+                    <a href="{% url 'accounts:signup' %}" class="btn nav-btn">Signup</a>
+                </div>
+            {% endif %}
+        </div>
+    </nav>
 
-{% block title %}Main{% endblock title %}
+    <section>
+        <div class="d-flex gap-3 justify-content-center">
+            {% for rank,movie in movie_list.items %}
+            <div>
+              <p class="rank">{{ rank }}위</p>
+              <div class = "rankcard">
+                <img src="{{ movie.0 }}" alt="" class="rankcard-img">
+                <p class="rank-title">{{ movie.1}} / 평점: {{ movie.2 }}</p>
+              </div>
+            </div> 
+            {% endfor %}
+        </div>
+    </section>
 
-
-{% block content %}
-
-<div class="d-flex gap-3 justify-content-center">
-    {% for rank,movie in movie_list.items %}
-    <div>
-      <h1>{{ rank }}위</h1>
-      <div class = "m-2 rounded-2" style="width: 300px; height: 480px; text-align: center; background-color: #252451; ">
-        <img src="{{ movie.0 }}" alt="" class="w-80 h-80 rounded-2 mt-3">
-        <p class="rank-title">{{ movie.1}} / {{ movie.2 }}</p>
-      </div>
-    </div> 
-    {% endfor %}
-  </div>
-
-{% endblock content %}
+    <!-- Modal -->
+    <div class="modal fade" id="loginmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5 fw-semibold" id="staticBackdropLabel">로그인</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            <div class="modal-body">
+                <form action="{% url 'accounts:login' %}" method="POST">
+                    {% csrf_token %}
+                    {{ login_form.as_p }}
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-login" value="로그인">
+                    </div>     
+                </form>
+            </div>    
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <a href='https://github.com/JeonggonCho' target='_blank'>조정곤</a> |
+            <a href='https://github.com/kwonjh0825' target='_blank'>권준혁</a> |
+            <a href='https://github.com/sodamjeong' target='_blank'>정소담</a>
+          </div>
+          <p>
+            <span>KDT 풀스택 2기</span><br/>
+            <span>Copyright 2023. All Rights Reserved.</span>
+          </p>
+          </footer>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+<script>
+    const back = () => {
+        window.history.back()
+    }
+  </script>
+</html>

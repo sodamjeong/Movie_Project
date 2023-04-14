@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-index
+Review
 {% endblock title %}
 
 {% block style %}
@@ -12,7 +12,7 @@ index
 {% block content %}
 <div class='container-fluid'>
     <div class='d-flex align-items-center gap-3 mb-4'>
-        <h4>영화 평가</h4>
+        <P class="review-list-title">Review List</P>
     </div>
 </div>
 <div class='container-fluid'>
@@ -23,9 +23,9 @@ index
                 {% if review.img_file %}
                     <img src="{{ review.img_file.url }}" alt="img" class='img'>
                 {% else %}
-                    <img src="{% static 'image/none_img.png' %}" alt="img">
+                    <img src="{% static 'image/none_img.png' %}" alt="img" class='img'>
                 {% endif %}
-                <div class="p-1">
+                <div class="p-2">
                     <div class='d-flex justify-content-between'>
                         <span class="movie-title text-truncate">MOVIE | {{ review.movie }}</span>
                         <span class="time">
@@ -36,11 +36,11 @@ index
                             {% endif %}
                         </span>
                     </div>
-                    <p>{{ review.user }}</p>
                     <div class='d-flex justify-content-between'>
-                        <p>{{ review.title }}</p>
-                        <p>댓글 수 - {{ review.comment_set.all|length }}</p>
+                      <p class="review-title text-truncate">제목 : {{ review.title }}</p>
+                      <p class="writer text-truncate"> {{ review.user }}</p>
                     </div>
+                    <p class="comment-count">댓글 수 - {{ review.comment_set.all|length }}</p>
                 </div>
             </div>
         </a>

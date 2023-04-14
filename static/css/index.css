@@ -1,14 +1,27 @@
+.review-list-title {
+    font-weight: 900;
+    font-size: 35px;
+    margin-bottom: 0px;
+}
+
 .card-form {
-    height: 400px;
-    width: 300px;
+    width: 200px;
+    height: 300px;
     border-radius: 10px;
     border: 0.1px solid lightgray;
     color:#503396;
+    box-shadow: 1px 1px 20px 1px #ccb6ff88;
+}
+
+.card-form:hover {
+    width: 210px;
+    height: 310px;
+    box-shadow: 4px 4px 15px 2px #c7afffa1;
 }
 
 .img {
-    height: 270px;
     width: 100%;
+    height: 60%;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
@@ -18,7 +31,27 @@
     font-weight: bold;
 }
 
+.review-title {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
 .time {
     width: 70px;
+    font-size: 12px;
     text-align: right;
+}
+
+.writer {
+    font-size: 12px;
+    margin-bottom: 0px;
+    width: 80px;
+    text-align: right;
+}
+
+.comment-count {
+    font-size: 13px;
+    text-align: end;
+    padding-bottom: 0px;
 }
