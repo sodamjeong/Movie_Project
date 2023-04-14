@@ -2,24 +2,27 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, logout as auth_logout, update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm, CustomAuthenticationForm
 from .models import User
+import os
+from django.conf import settings
 
 # Create your views here.
 def signup(request):
     if request.user.is_authenticated:
         return redirect('reivews:index')
-
+    login_form = AuthenticationForm()
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('accounts:login')
+        signup_form = CustomUserCreationForm(request.POST, request.FILES)
+        if signup_form.is_valid():
+            signup_form.save()
+            return redirect('reviews:index')
     else:
-        form = CustomUserCreationForm()
-
+        signup_form = CustomUserCreationForm()
+    
     context = {
-        'form': form, 
+        'signup_form': signup_form, 
+        'login_form': login_form,
     }
     return render(request, 'accounts/signup.html', context)
 
@@ -28,17 +31,10 @@ def login(request):
         return redirect('reviews:index')
     
     if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
+        form = CustomAuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
             return redirect('reviews:index')
-    else:
-        form = AuthenticationForm()
-
-    context = {
-        'form': form,
-    }
-    return render(request, 'accounts/login.html', context)
 
 @login_required
 def logout(request):
@@ -47,11 +43,17 @@ def logout(request):
 
 @login_required
 def update(request):
+    # user = User.objects.get(pk=request.user.pk)
     if request.method == 'POST':
+        # file_change_check = request.POST.get('fileChange', False)
+        # file_check = request.POST.get('upload_files-clear', False)
+        # if file_change_check or file_check:
+        #     os.remove(os.path.join(settings.MEDIA_ROOT, user.profile_image.path))
+        
         form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('accounts:mypage')
+            return redirect('accounts:mypage', request.user.pk)
     else:
         form = CustomUserChangeForm(instance=request.user)
         

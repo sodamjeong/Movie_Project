@@ -5,9 +5,13 @@
 {% endblock title %}
 
 {% block content %}
-  <form action="{% url 'accounts:signup' %}" method="POST">
+<div class="signupform">
+  <h1>회원 가입</h1>
+  <form action="{% url 'accounts:signup' %}" method="POST" enctype='multipart/form-data'>
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="회원가입">
+    {{ signup_form.as_p }}
+    <input type="submit" value="회원가입" class="btn btn-login">
+    <button class="btn btn-login" onclick=back()>뒤로가기</button>
   </form>
+</div>
 {% endblock content %}

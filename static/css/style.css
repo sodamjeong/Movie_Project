@@ -1,4 +1,107 @@
+@font-face {
+    font-family: 'TAEBAEKmilkyway';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/TAEBAEKmilkyway.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'TAEBAEKmilkyway';
+}
 .logo {
     height: 30px;
     width: 30px;
 }
+
+.navbar {
+    background-color: #252451;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: white;
+}
+
+.nav-btn {
+    border-radius: 1rem;
+    color: white;
+    border: solid 2px white;
+    padding: 0.5rem;
+    background-color: none;
+}
+
+.nav-btn:hover {
+    color: #503396;
+    border: solid 2px #252451;
+}
+
+.usertext {
+    color: white;
+    
+}
+
+.reviewform {
+    width: 40%;
+    min-width: 400px;
+}
+
+.signupform {
+    width: 40%;
+    min-width: 400px;
+    margin: auto;
+}
+
+.btn-login {
+    border: solid 1px #252451;
+    color: #503396;
+}
+
+.btn-login:hover {
+    background-color: #503396;
+    color: white;
+}
+
+.profile-image {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    text-align: center;
+    line-height: 300px;
+}
+
+a {
+    text-decoration: none;
+}
+
+section {
+    margin-top: 1rem;
+    padding-bottom: 90px;
+
+}
+
+footer {
+    font-style: italic;
+    bottom: 0;
+    position: absolute;
+    height: 90px;
+    width: 100%;
+    background-color: #7a56cb;
+    padding: 8px;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+}
+
+li {
+    list-style-type: none;
+}
+
+body {
+    position: relative;
+}
+
