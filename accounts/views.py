@@ -35,11 +35,11 @@ def login(request):
             auth_login(request, form.get_user())
             return redirect('reviews:index')
     else:
-        form= CustomAuthenticationForm()
+        form = CustomAuthenticationForm()
     context = {
         'login_form': form,
     }
-    return render(request,'reviews/index.html', context)
+    return render(request,'accounts/login.html', context)
 
 @login_required
 def logout(request):
