@@ -135,3 +135,11 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm):
         model = get_user_model()
         fields = ('email', 'last_name', 'birthday', )
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    new_password1 = forms.CharField(
+        label='새 비밀번호',
+        widget= forms.PasswordInput(),
+        help_text='',
+    )

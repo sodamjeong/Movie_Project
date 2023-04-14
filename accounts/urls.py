@@ -8,6 +8,6 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('update/', views.update, name='update'),
     path('delete/', views.delete, name='delete'),
-    path('change_password/', views.delete, name='change_password'),
+    path('change_password/', views.change_password, name='change_password'),
     path('mypage/<int:accounts_pk>/', views.mypage, name='mypage'),
 ]
